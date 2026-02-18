@@ -1,41 +1,44 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
-public class VisualFeedbackOnMeshRenderer : VisualFeedback
+namespace InheritanceImplementation
 {
-    private MeshRenderer meshRenderer = null;
-
-    private void Start()
+    [RequireComponent(typeof(MeshRenderer))]
+    public class VisualFeedbackOnMeshRenderer : VisualFeedback
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-    }
+        private MeshRenderer meshRenderer = null;
 
-    public override void ShowFeedback()
-    {
-        // Stop coroutine.
-        StopCoroutine(nameof(UpdateFeedback));
-
-        // (re) Start coroutine.
-        StartCoroutine(nameof(UpdateFeedback));
-    }
-
-    private IEnumerator UpdateFeedback()
-    {
-        float duration = 2.0f;
-        float timer = 0.0f;
-
-        do
+        private void Start()
         {
-            // Change mesh renderer's material's color.
-            meshRenderer.material.color = Color.Lerp(Color.red, Color.white, timer / duration);
+            meshRenderer = GetComponent<MeshRenderer>();
+        }
 
-            // Update timer value.
-            timer += Time.deltaTime;
+        public override void ShowFeedback()
+        {
+            // Stop coroutine.
+            StopCoroutine(nameof(UpdateFeedback));
 
-            // Yield
-            yield return 0;
+            // (re) Start coroutine.
+            StartCoroutine(nameof(UpdateFeedback));
+        }
 
-        } while (timer < duration);
+        private IEnumerator UpdateFeedback()
+        {
+            float duration = 2.0f;
+            float timer = 0.0f;
+
+            do
+            {
+                // Change mesh renderer's material's color.
+                meshRenderer.material.color = Color.Lerp(Color.red, Color.white, timer / duration);
+
+                // Update timer value.
+                timer += Time.deltaTime;
+
+                // Yield
+                yield return 0;
+
+            } while (timer < duration);
+        }
     }
 }

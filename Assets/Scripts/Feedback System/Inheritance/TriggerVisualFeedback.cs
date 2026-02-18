@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TriggerVisualFeedback : MonoBehaviour
+namespace InheritanceImplementation
 {
-    [SerializeField]
-    private VisualFeedback[] visualFeedbacks = new VisualFeedback[0];
-
-    private void Update()
+    public class TriggerVisualFeedback : MonoBehaviour
     {
-        if (Keyboard.current.spaceKey.isPressed)
+        [SerializeField]
+        private VisualFeedback[] visualFeedbacks = new VisualFeedback[0];
+
+        private void Update()
         {
-            foreach (VisualFeedback visualFeedback in visualFeedbacks)
+            if (Keyboard.current.spaceKey.isPressed)
             {
-                visualFeedback.ShowFeedback();
+                foreach (VisualFeedback visualFeedback in visualFeedbacks)
+                {
+                    visualFeedback.ShowFeedback();
+                }
             }
         }
     }

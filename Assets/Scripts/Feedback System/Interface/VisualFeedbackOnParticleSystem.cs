@@ -2,10 +2,10 @@ using System.Collections;
 
 using UnityEngine;
 
-namespace InheritanceImplementation
+namespace InterfaceImplementation
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public class VisualFeedbackOnParticleSystem : VisualFeedback
+    public class VisualFeedbackOnParticleSystem : MonoBehaviour, IVisualFeedback
     {
         /// <summary>
         /// https://docs.unity3d.com/6000.3/Documentation/ScriptReference/ParticleSystemRenderer.html
@@ -17,7 +17,7 @@ namespace InheritanceImplementation
             particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
         }
 
-        public override void ShowFeedback()
+        public void ShowFeedback()
         {
             // Stop coroutine.
             StopCoroutine(nameof(UpdateFeedback));
